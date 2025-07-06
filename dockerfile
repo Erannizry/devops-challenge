@@ -1,12 +1,12 @@
 FROM python:3.13.5-slim
 
-WORKDIR /app
+WORKDIR /docker-challenge
 
-COPY requirements.txt /app
+COPY requirements.txt /docker-challenge
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY /app /app
+COPY /app /docker-challenge/app
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["flask", "--app", "app", "run", "--host", "0.0.0.0"]
