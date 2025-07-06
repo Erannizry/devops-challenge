@@ -2,7 +2,7 @@ FROM python:3.13.5-slim
 
 WORKDIR /docker-challenge
 
-COPY requirements.txt /docker-challenge
+COPY requirements/base.txt /docker-challenge/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY /app /docker-challenge/app
