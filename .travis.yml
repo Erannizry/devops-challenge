@@ -1,8 +1,25 @@
 language: python
 python:
-  -"3.13.5"
+  - "3.13.5"
+
 install:
   - pip install -r test-requirements.txt
+
 script:
   - pytest
-  
+
+services:
+  - docker
+
+before_deploy:
+  - docker build -t $DOCKERHUB_USERNAME/devops-challenge .
+  - docker tag $DOCKERHUB_USERNAME/devops-challenge $DOCKERHUB_USERNAME/devops-challenge:$TRAVIS_COMMIT
+
+deploy:
+  provider: script
+  script: 
+    - docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_ACCESS_TOKEN" 
+    - docker push $DOCKERHUB_USERNAME/devops-challenge:$TRAVIS_COMMIT
+    - docker push $DOCKERHUB_USERNAME/devops-challenge
+  on:
+    branch: master
