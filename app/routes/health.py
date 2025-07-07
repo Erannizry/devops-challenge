@@ -10,7 +10,7 @@ def get_health():
     Returns a JSON response with project status and metadata.
     """
     return jsonify({
-        "container": "placeholder",
+        "container": "https://hub.docker.com/r/eraniz/devops-challenge",
         "project": "https://github.com/Erannizry/devops-challenge",
         "status": "healthy"
     })
