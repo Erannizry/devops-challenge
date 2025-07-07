@@ -1,9 +1,14 @@
 from flask import Blueprint, jsonify
 
+# Blueprint for health check routes
 health_bp = Blueprint("health", __name__)
 
 @health_bp.route("/health")
 def get_health():
+    """
+    Health check endpoint.
+    Returns a JSON response with project status and metadata.
+    """
     return jsonify({
         "container": "placeholder",
         "project": "https://github.com/Erannizry/devops-challenge",

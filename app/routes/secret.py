@@ -2,10 +2,15 @@ import os
 import boto3
 from flask import Blueprint, jsonify
 
+# Blueprint for secret-related routes
 secret_bp = Blueprint('secret', __name__)
 
 @secret_bp.route("/secret")
 def get_secret():
+    """
+    Retrieve a secret code from DynamoDB using environment variables.
+    Returns the secret code as JSON, or an error message if retrieval fails.
+    """
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(os.getenv("DYNAMODB_TABLE"))
@@ -15,4 +20,3 @@ def get_secret():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
