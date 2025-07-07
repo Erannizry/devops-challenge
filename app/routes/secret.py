@@ -11,7 +11,7 @@ def get_secret():
         table = dynamodb.Table(os.getenv("DYNAMODB_TABLE"))
 
         response = table.get_item(Key={"codeName": os.getenv("CODE_NAME")})
-        return jsonify({"secret_code": response["Item"]["secretCode"]})
+        return jsonify({"secret_code": response["Item"]})
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
